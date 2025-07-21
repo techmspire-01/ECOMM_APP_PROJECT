@@ -1,0 +1,425 @@
+    1  sudo apt update  && sudo apt upgrade -y 
+    2  sudo apt update
+    3  sudo apt install python3-pip python3-venv nginx mysql-server
+    4  mysql --version
+    5  sudo systemctl status nginx
+    6  sudo systemctl status  mysql.service 
+    7  cd /var/www/html/
+    8  ls -l
+    9  rm -rf index.nginx-debian.html 
+   10  ll -l  index.nginx-debian.html 
+   11  cd ..
+   12  ll
+   13  cd html/
+   14  rm -rf index.nginx-debian.html 
+   15  sudo rm -rf index.nginx-debian.html 
+   16  ll
+   17  python3 -m venv venv
+   18  chown -R www-data:www-data ../html/
+   19  sudo chown -R www-data:www-data ../html/
+   20  ls -l
+   21  chmod -R 755 ../html/
+   22  sudo chmod -R 755 ../html/
+   23  ls -l
+   24  python3 -m venv venv
+   25  sudo python3 -m venv venv
+   26  ls -l
+   27  cd venv/
+   28  ll
+   29  cd ..
+   30  source venv/bin/activate
+   31  deactivate 
+   32  vi requirements.txt
+   33  sudo vi requirements.txt
+   34  source venv/bin/activate
+   35  pip install -r requirements.txt
+   36  sudo pip install -r requirements.txt
+   37  deactivate 
+   38  sudo chown -R ubuntu:ubuntu ../html/
+   39  source venv/bin/activate
+   40  pip install -r requirements.txt 
+   41  ls -l
+   42  vi  db.sql 
+   43  sudo systemctl start mysql
+   44  mysql -u root -p < db.sql
+   45  sudo mysql -u root -p < db.sql
+   46  deactivate 
+   47  sudo mysql -u root -p < db.sql
+   48  sudo mysql_secure_installation
+   49  sudo mysql -u root -p 
+   50  sudo mysql -u root -p < db.sql
+   51  sudo mysql -u root -p 
+   52  ls -l
+   53  sudo apt install vsftpd
+   54  cp -r /home/ubuntu/*.html .
+   55  ls -l
+   56  gunicorn --bind 127.0.0.1:5000 app:app
+   57  source venv/bin/activate
+   58  gunicorn --bind 127.0.0.1:5000 app:app
+   59  ls -l
+   60  cp -r /home/ubuntu/app.py .
+   61  gunicorn --bind 127.0.0.1:5000 app:app
+   62  deactivate 
+   63  source venv/bin/activate
+   64  ls -l
+   65  gunicorn --bind 127.0.0.1:5000 app:app
+   66  mkdir api
+   67  ls -l
+   68  cp -r *.html api/
+   69  ls -l
+   70  ll api/
+   71  ll
+   72  python3 app.py
+   73  gunicorn --bind 127.0.0.1:5000 app:app
+   74  vi app.py 
+   75  cat app.py 
+   76  vi app.py
+   77  gunicorn --bind 127.0.0.1:5000 app:app
+   78  cd /etc/nginx/sites-available/
+   79  ls -l
+   80  cat default 
+   81  vi techmspire.conf
+   82  sudo vi techmspire.conf
+   83  ls -l
+   84  sudo ln -s /etc/nginx/sites-available/techmspire.conf /etc/nginx/sites-enabled/
+   85  sudo nginx -t
+   86  sudo systemctl restart nginx
+   87  history
+   88  cat techmspire.conf 
+   89  ls -l
+   90  cat techmspire.conf 
+   91  sudo mysql -u root   -p
+   92  cd
+   93  ls -l
+   94  cd /var/www/html/
+   95  ll
+   96  vi index.html 
+   97  vi app.py 
+   98  cat app.py  | grep -i  folder
+   99  cat app.py  | grep -i  *folder*
+  100  cat app.py 
+  101  cp -r app.py app.py_ori
+  102  vi app.py
+  103  sudo vi app.py
+  104  ls -l
+  105  sudo systemctl restart nginx
+  106  sudo mysql -u root -p root
+  107  sudo mysql -u root -p
+  108  sudo journalctl -u gunicorn
+  109  sudo vi /etc/systemd/system/gunicorn.service
+  110  sudo systemctl daemon-reexec
+  111  sudo systemctl daemon-reload
+  112  sudo systemctl start gunicorn
+  113  sudo systemctl enable gunicorn
+  114  netstat -tlnp 
+  115  ss -tlnp
+  116  cat index.html 
+  117  cat app.py
+  118  cat home.html 
+  119  grep -i window  index.html 
+  120  cp -r index.html /opt/index.html
+  121  sudo cp -r index.html /opt/index.html
+  122  vi index.html 
+  123  sudo systemctl restart nginx
+  124  sudo mysql -u root -p
+  125  ls -l
+  126  cd api/
+  127  ll
+  128  ls
+  129  cat ../app.py  | grep -i "/api/login
+  130  cat ../app.py  | grep -i "/api/login"
+  131  cp -r ../index.html .
+  132  sudo systemctl restart nginx
+  133  ls -l
+  134  mv  ../*.html  .
+  135  ls -l
+  136  cd ..
+  137  ls -l
+  138  sudo systemctl restart nginx
+  139  sudo systemctl status gunicorn
+  140  cd /etc/nginx/sites-available/
+  141  ll
+  142  sudo mv default /opt/
+  143  sudo ln -s /etc/nginx/sites-available/techmspire.conf /etc/nginx/sites-enabled/
+  144  cd ../sites-enabled/
+  145  ll
+  146  ls -l
+  147  sudo systemctl restart nginx
+  148  ll
+  149  sudo vi techmspire.conf 
+  150  ls -l
+  151  rm -rf default 
+  152  sudo rm -rf default 
+  153  ls -l
+  154  sudo systemctl restart nginx
+  155  cd /var/www/html/
+  156  ll
+  157  cd api/
+  158  ll
+  159  cd ..
+  160  cat app.py
+  161  vi app.py
+  162  sudo vi app.py
+  163  sudo systemctl restart gunicorn
+  164  sudo journalctl -u gunicorn -f
+  165  sudo mysql -u root -p
+  166  sudo vi app.py
+  167  sudo systemctl restart gunicorn
+  168  sudo journalctl -u gunicorn -f
+  169  sudo systemctl status mysql
+  170  sudo systemctl restart mysql
+  171  sudo journalctl -u gunicorn -f
+  172  sudo systemctl restart gunicorn
+  173  mysql -u techmspire -p
+  174  sudo vi  app-mysql.py
+  175  python app-mysql.py 
+  176  suo vi app
+  177  suo vi app.py
+  178  sudo  vi app.py
+  179  mysql -u techmspire -p
+  180  ll
+  181  sudo rm -rf app-mysql.py 
+  182  ll
+  183  sudo vi app.py
+  184  sudo systemctl restart gunicorn
+  185  sudo journalctl -u gunicorn -f
+  186  sudo vi app.py
+  187  ll
+  188  cd api/
+  189  ll
+  190  vi products.html 
+  191  sudo vi app.py
+  192  cd ..
+  193  sudo vi app.py
+  194  sudo systemctl restart gunicorn
+  195  sudo journalctl -u gunicorn -f
+  196  sudo vi app.py
+  197  ls -l
+  198  mkdir /home/ubuntu/21-07-25
+  199  cp -r app.py /home/ubuntu/21-07-25/
+  200  cp -r *  /home/ubuntu/21-07-25/
+  201  cd 
+  202  ll
+  203  ll 21-07-25/
+  204  cd 
+  205  ll
+  206  cat /etc/nginx/sites-available/techmspire.conf 
+  207  cd -
+  208  cd /var/www/html/
+  209  ll
+  210  ls -l
+  211  cat api/home.html | grep -i href
+  212  sudo vi app.py
+  213  sudo systemctl restart gunicorn
+  214  sudo vi app.py
+  215  sudo systemctl restart gunicorn
+  216  sudo vi app.py
+  217  sudo systemctl restart gunicorn
+  218  sudo vi app.py
+  219  sudo systemctl restart gunicorn
+  220  sudo vi app.py
+  221  sudo systemctl restart gunicorn
+  222  sudo vi app.py
+  223  sudo systemctl restart gunicorn
+  224  rm -rf app.py
+  225  ls -l
+  226  cp -r /home/ubuntu/21-07-25/app.py
+  227  cp -r /home/ubuntu/21-07-25/app.py .
+  228  ls -l
+  229  sudo systemctl restart gunicorn
+  230  sudo journalctl -u gunicorn -f
+  231  mysql -u techmspire -p
+  232  vi api/home.html 
+  233  cat app.py
+  234  cp -r app.py app.py_modified-3pm
+  235  vi app.py
+  236  sudo vi app.py
+  237  sudo systemctl restart gunicorn
+  238  grep href api/home.html 
+  239  ls -l
+  240  sudo vi app.py
+  241  sudo systemctl restart gunicorn
+  242  sudo vi app.py
+  243  sudo systemctl restart gunicorn
+  244  sudo vi api/home.html 
+  245  sudo systemctl restart gunicorn
+  246  sudo vi api/home.html 
+  247  sudo systemctl restart gunicorn
+  248  sudo vi api/home.html 
+  249  sudo systemctl restart gunicorn
+  250  sudo vi app.py
+  251  sudo vi api/home.html 
+  252  sudo systemctl restart gunicorn
+  253  sudo vi app.py
+  254  sudo systemctl restart gunicorn
+  255  sudo vi api/products.html 
+  256  sudo systemctl restart gunicorn
+  257  sudo vi api/cart.html 
+  258  sudo vi api/signup.html 
+  259  sudo vi api/order.html 
+  260  sudo vi api/contact.html 
+  261  sudo systemctl restart gunicorn
+  262  sudo vi api/index.html 
+  263  cd api/
+  264  sudo vi logout.html
+  265  sudo systemctl restart gunicorn
+  266  sudo vi index.html 
+  267  sudo vi products.html 
+  268  sudo systemctl restart gunicorn
+  269  sudo vi products.html 
+  270  sudo systemctl restart gunicorn
+  271  cat products.html 
+  272  sudo vi products.html 
+  273  sudo systemctl restart gunicorn
+  274  sudo vi products.html 
+  275  cat products.html 
+  276  cp -r products.html products.html_ori
+  277  sudo vi products.html
+  278  sudo systemctl restart gunicorn
+  279  sudo vi ../app.py
+  280  sudo systemctl restart gunicorn
+  281  cat ../app.py
+  282  ls -l 
+  283  cd ..
+  284  ll
+  285  cp -r app.py app.py_modified-5pm
+  286  sudo vi app.py
+  287  sudo systemctl restart gunicorn
+  288  sudo mysql -u techmspire -p
+  289  ls -l
+  290  cd api/
+  291  ls -l
+  292  cp -r cart.html cart.html_ori
+  293  sudo vi cart.html
+  294  sudo systemctl restart gunicorn
+  295  ls -l
+  296  cat cart.html
+  297  cp -r cart.html cart.html_5-30pm
+  298  sudo vi cart.html
+  299  sudo systemctl restart gunicorn
+  300  cp -r order.html order.html_ori
+  301  sudo vi order.html
+  302  sudo systemctl restart gunicorn
+  303  cd ..
+  304  cp -r * /home/ubuntu/ecomm
+  305  cp -r /etc/nginx/sites-available/techmspire.conf /home/ubuntu/ecomm
+  306  cd api/
+  307  sudo vi order-history.html
+  308  cp -r ../app.py ../app.py_6pm
+  309  sudo vi ../app.py
+  310  sudo mysql  -u techmspire -p
+  311  sudo systemctl restart gunicorn
+  312  ls -l
+  313  cat order.html
+  314  sudi vi  order.html
+  315  sudo vi  order.html
+  316  ls -l
+  317  sudo systemctl restart gunicorn
+  318  sudo mysql  -u techmspire -p
+  319  sudo systemctl restart gunicorn
+  320  cat products.html
+  321  sudo mysql  -u techmspire -p
+  322  ls -l
+  323  cp -r products.html products.html_7pm
+  324  sudo vi products.html
+  325  sudo systemctl restart gunicorn
+  326  sudo mysql  -u techmspire -p
+  327  sudo systemctl restart gunicorn
+  328  ls -l
+  329  cd ..
+  330  mkdir /home/ubuntu/22july2025 && cp -r * /home/ubuntu/22july2025/
+  331  ls -l
+  332  sudo mysqldump  -u techmspire -p > db-final.sql
+  333  ls -l
+  334  du -sh db-final.sql 
+  335  du -sh db.sql 
+  336  cp -r db-final.sql /home/ubuntu/22july2025/
+  337  sudo systemctl restart gunicorn
+  338  cat api/cart.html
+  339  cd api/
+  340  cp -r  cart.html cart.html_9pm
+  341  sudo vi cart.html
+  342  sudo mysql  -u techmspire -p
+  343  cat ../app.py
+  344  cd ..
+  345  cp -r app.py   app.py_9pm
+  346  sudo vi app.py
+  347  sudo systemctl restart gunicorn
+  348  ls -l
+  349  cp -r * /home/ubuntu/22july2025/
+  350  cat api/home.html 
+  351  cp -r api/home.html api/home.html_10pm
+  352  sudo vi api/home.html
+  353  sudo systemctl restart gunicorn
+  354  sudo vi api/home.html
+  355  cd api/
+  356  cp -r products.html products.html_10pm
+  357  sudo vi products.html
+  358  cat products.html
+  359  ls -l
+  360  cp -r products.html products.html_11pm
+  361  sudo vi products.html
+  362  sudo systemctl restart gunicorn
+  363  cat 
+  364  cat products.html |less
+  365  sudo mysql  -u techmspire -p
+  366  cat products.html
+  367  sudo mysql  -u techmspire -p
+  368  ls -l
+  369  mkdir images
+  370  cp -r /home/ubuntu/22july2025/images/* images/
+  371  ls -l
+  372  sudo systemctl restart gunicorn
+  373  sudo systemctl daemon-reload 
+  374  sudo systemctl restart gunicorn
+  375  sudo mysql  -u techmspire -p
+  376  sudo systemctl restart gunicorn
+  377  sudo vi  /etc/nginx/sites-available/techmspire.conf 
+  378  sudo systemctl restart nginx
+  379  cd ..
+  380  sudo vi app.py
+  381  cat api/products.html
+  382  cp -r api/products.html api/products.html_12pm
+  383  vi api/products.html
+  384  sudo systemctl restart gunicorn
+  385  sudo systemctl restart nginx
+  386  cp -r /home/ubuntu/22july2025/images/* api/images/
+  387  cp * /home/ubuntu/22july2025/
+  388  cp -r * /home/ubuntu/22july2025/
+  389  apt install git
+  390  sudo apt install git
+  391  ls -l
+  392  git init
+  393  ls -l
+  394  ls -la
+  395  git add .
+  396  git status 
+  397  git commit -m "Internship Project" *
+  398  git clone https://github.com/techmspire-01/ECOMM_APP_PROJECT.git
+  399  ls -la
+  400  cd ECOMM_APP_PROJECT/
+  401  ll
+  402  git remote set-url origin https://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@github.com/techmspire-01/ECOMM_APP_PROJECT
+  403  git remote -v
+  404  git push origin main
+  405  ls -l
+  406  ll
+  407  cd ..
+  408  git push origin main
+  409  git  remote add origin https://github.com/techmspire-01/ECOMM_APP_PROJECT.git
+  410  git push origin main
+  411  cd ECOMM_APP_PROJECT/
+  412  git push origin main
+  413  git push origin https://github.com/techmspire-01/ECOMM_APP_PROJECT
+  414  cp -r ../* .
+  415  ls -l
+  416  rm -rf ECOMM_APP_PROJECT/
+  417  ls -l
+  418  git add .
+  419  git commit -m "all" *
+  420  git push origin main
+  421  cp -r /etc/nginx/sites-available/techmspire.conf .
+  422  git add techmspire.conf 
+  423  git commit  -m "nginx default file" techmspire.conf 
+  424  git push origin main
+  425  history  > command_history.txt
