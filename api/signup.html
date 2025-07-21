@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up - Techmspire</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Additional styling for Amazon-like layout */
+    body {
+      background-color: #f6f6f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    .signup-container {
+      background-color: white;
+      padding: 2rem;
+      width: 350px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      border-radius: 5px;
+    }
+
+    .signup-container h1 {
+      font-size: 1.5rem;
+      color: #131921;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .signup-container label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    .signup-container input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #a6a6a6;
+    }
+
+    .signup-container button {
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 10px;
+      background-color: #f0c14b;
+      border: 1px solid #a88734;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .signup-container p {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h1>Create account</h1>
+    <form id="signup-form" enctype="multipart/form-data">
+      <label for="username">Your name</label>
+      <input type="text" name="username" id="username" required />
+
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" required />
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required />
+
+      <button type="submit">Continue</button>
+    </form>
+    <p>Already have an account? <a href="index.html">Sign in</a></p>
+  </div>
+
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        alert('Account created! You can now log in.');
+        window.location.href = 'index.html';
+      } else {
+        const errorText = await response.text();
+        alert(`Signup failed: ${errorText}`);
+      }
+    });
+  </script>
+</body>
+</html>

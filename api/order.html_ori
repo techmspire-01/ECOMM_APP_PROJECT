@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Place Order - Techmspire</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background-color: #f3f3f3;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    .header {
+      background-color: #131921;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+
+    .nav-links a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .order-form-container {
+      background-color: white;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 2rem auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .order-form-container h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #111;
+    }
+
+    form label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1rem;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 0.3rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .order-form-container button {
+      width: 100%;
+      margin-top: 2rem;
+      padding: 12px;
+      background-color: #f0c14b;
+      border: 1px solid #a88734;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #131921;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Techmspire Store</h1>
+    <nav class="nav-links">
+      <a href="/home">Home</a>
+      <a href="/products">Products</a>
+      <a href="/cart">Cart</a>
+      <a href="/contact">Contact</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </div>
+
+  <div class="order-form-container">
+    <h2>Shipping & Payment Details</h2>
+    <form action="/order" method="POST">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="address">Shipping Address</label>
+      <textarea id="address" name="address" rows="3" required></textarea>
+
+      <label for="payment">Payment Mode</label>
+      <input type="text" id="payment" name="payment" placeholder="Cash on Delivery / UPI" required />
+
+      <button type="submit">Confirm Order</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Techmspire Pvt. Ltd. | Your trusted tech store 🔥
+  </footer>
+
+  <script>
+    function logout() {
+      alert('You have been logged out.');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Products - ECOMM APP</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f3f3f3, #e6ecff);
+      color: #333;
+    }
+
+    .header {
+      background-color: #232f3e;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      color: white;
+      margin-left: 1.2rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffa41c;
+    }
+
+    .filter-bar {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .filter-bar input, .filter-bar select {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .filter-bar input {
+      flex: 1 1 60%;
+      min-width: 240px;
+    }
+
+    .filter-bar select {
+      flex: 1 1 30%;
+      min-width: 160px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+    }
+
+    .product-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+      color: #222;
+    }
+
+    .product-card p {
+      font-weight: bold;
+      color: #b12704;
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .product-card button {
+      background: #ffa41c;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .product-card button:hover {
+      background: #e38f11;
+    }
+
+    footer {
+      background-color: #232f3e;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>ECOMM APP</h1>
+    <nav class="nav-links">
+      <a href="/home">Home</a>
+      <a href="/cart">Cart</a>
+      <a href="/order">Order</a>
+      <a href="/contact">Contact</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </div>
+
+  <div class="filter-bar">
+    <input type="text" id="search-box" placeholder="Search products..." />
+    <select id="category-filter">
+      <option value="">All Categories</option>
+      <option value="Laptops">Laptops</option>
+      <option value="Mobiles">Mobiles</option>
+      <option value="Accessories">Accessories</option>
+      <option value="Audio">Audio</option>
+      <!-- Add more categories if needed -->
+    </select>
+  </div>
+
+  <section class="product-grid" id="product-list">
+    <!-- Dynamic product cards will be injected here -->
+  </section>
+
+  <footer>
+    &copy; 2025 ECOMM APP Pvt. Ltd. | Your trusted tech store 🔥
+  </footer>
+
+  <script>
+    async function loadProducts() {
+      try {
+        const res = await fetch('/api/products');
+        const products = await res.json();
+
+        const searchInput = document.getElementById('search-box').value.toLowerCase();
+        const selectedCategory = document.getElementById('category-filter').value;
+        const container = document.getElementById('product-list');
+        container.innerHTML = '';
+
+        products
+          .filter(p =>
+            (!searchInput || p.name.toLowerCase().includes(searchInput)) &&
+            (!selectedCategory || p.category === selectedCategory)
+          )
+          .forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+              <img src="https://via.placeholder.com/240x180?text=${encodeURIComponent(p.name)}" alt="${p.name}">
+              <h3>${p.name}</h3>
+              <p>₹${parseFloat(p.price).toFixed(2)}</p>
+              <button onclick="addToCart(${p.id})">Add to Cart</button>
+            `;
+            container.appendChild(card);
+          });
+
+        if (container.innerHTML === '') {
+          container.innerHTML = '<p>No products found.</p>';
+        }
+      } catch (err) {
+        console.error('Failed to load products:', err);
+        document.getElementById('product-list').innerHTML = '<p>Unable to fetch products.</p>';
+      }
+    }
+
+    async function addToCart(productId) {
+      try {
+        const res = await fetch('/api/cart', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ product_id: productId })
+        });
+
+        if (res.ok) {
+          alert('✅ Product added to cart!');
+        } else {
+          const msg = await res.text();
+          alert('❌ Failed to add: ' + msg);
+        }
+      } catch (err) {
+        console.error('Add to cart error:', err);
+        alert('❌ Something went wrong.');
+      }
+    }
+
+    function logout() {
+      fetch('/api/logout').then(() => {
+        alert('You have been logged out.');
+        window.location.href = '/';
+      });
+    }
+
+    document.getElementById('search-box').addEventListener('input', loadProducts);
+    document.getElementById('category-filter').addEventListener('change', loadProducts);
+    window.onload = loadProducts;
+  </script>
+</body>
+</html>

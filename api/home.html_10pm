@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home - Techmspire</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background-color: #f3f3f3;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    .header {
+      background-color: #131921;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+
+    .nav-links a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .welcome-banner {
+      background-color: #fff;
+      margin: 2rem auto;
+      max-width: 900px;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .welcome-banner h2 {
+      color: #111;
+      font-size: 1.5rem;
+    }
+
+    .welcome-banner p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    footer {
+      background-color: #131921;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Techmspire Store</h1>
+    <nav class="nav-links">
+      <a href="/products">Products</a>
+      <a href="/cart">Cart</a>
+      <a href="/order">Order</a>
+      <a href="/contact">Contact</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </div>
+
+  <div class="welcome-banner">
+    <h2>Welcome to Techmspire Mega Store</h2>
+    <p>Discover amazing deals on gadgets, place orders instantly, and manage your cart with ease!</p>
+  </div>
+
+  <footer>
+    &copy; 2025 Techmspire Pvt. Ltd. | Your trusted tech store 🔥
+  </footer>
+
+  <script>
+    function logout() {
+      alert('You have been logged out.');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

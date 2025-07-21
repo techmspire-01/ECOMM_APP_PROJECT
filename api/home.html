@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home - ECOMM APP</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f3f3f3, #e6ecff);
+      color: #333;
+    }
+
+    .header {
+      background-color: #232f3e;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      color: white;
+      margin-left: 1.2rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffa41c;
+    }
+
+    .hero {
+      background: linear-gradient(to right, #007bff, #6610f2);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .action-buttons a {
+      background: white;
+      color: #007bff;
+      border: 2px solid #007bff;
+      padding: 0.8rem 1.4rem;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .action-buttons a:hover {
+      background: #007bff;
+      color: white;
+    }
+
+    footer {
+      background-color: #232f3e;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>ECOMM APP</h1>
+    <nav class="nav-links">
+      <a href="/products">Products</a>
+      <a href="/cart">Cart</a>
+      <a href="/order">Order</a>
+      <a href="/order-history">Order-history</a>
+      <a href="/contact">Contact</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <h2>Welcome to ECOMM APP</h2>
+    <p>Your one-stop destination for the latest gadgets, seamless shopping, and rapid checkout.</p>
+    <div class="action-buttons">
+      <a href="/products">Browse Products</a>
+      <a href="/order">Place Order</a>
+      <a href="/order-history">View History</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 ECOMM APP Pvt. Ltd. | Bringing Tech to Life 🌐
+  </footer>
+
+  <script>
+    function logout() {
+      fetch('/api/logout').then(() => {
+        alert('You have been logged out.');
+        window.location.href = '/';
+      });
+    }
+  </script>
+</body>
+</html>

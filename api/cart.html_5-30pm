@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Cart - Techmspire</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background-color: #f3f3f3;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    .header {
+      background-color: #131921;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+
+    .nav-links a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .cart-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      text-align: center;
+      color: #222;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding: 12px 0;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .cart-item-price {
+      color: #b12704;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .cart-total {
+      margin-top: 24px;
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+      color: #007BFF;
+    }
+
+    footer {
+      background-color: #131921;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Techmspire Cart</h1>
+    <nav class="nav-links">
+      <a href="/home">Home</a>
+      <a href="/products">Products</a>
+      <a href="/order">Order</a>
+      <a href="/contact">Contact</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </div>
+
+  <div class="cart-container">
+    <h2>Your Cart</h2>
+    <div id="cart-items">
+      <!-- Cart items will be injected here -->
+    </div>
+    <div class="cart-total" id="cart-total">
+      Total: ₹0.00
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Techmspire Pvt. Ltd. | Powering your tech lifestyle 🔋
+  </footer>
+
+  <script>
+    async function loadCart() {
+      try {
+        const res = await fetch('/api/cart');
+        const cart = await res.json();
+        const container = document.getElementById('cart-items');
+        const totalDisplay = document.getElementById('cart-total');
+
+        container.innerHTML = '';
+        let total = 0;
+
+        cart.forEach(item => {
+          total += parseFloat(item.price);
+          const row = document.createElement('div');
+          row.className = 'cart-item';
+          row.innerHTML = `
+            <div class="cart-item-name">${item.product_name}</div>
+            <div class="cart-item-price">₹${parseFloat(item.price).toFixed(2)}</div>
+          `;
+          container.appendChild(row);
+        });
+
+        totalDisplay.textContent = `Total: ₹${total.toFixed(2)}`;
+      } catch (err) {
+        console.error('Failed to load cart items:', err);
+        document.getElementById('cart-items').innerHTML = '<p>Unable to load cart.</p>';
+        document.getElementById('cart-total').textContent = '';
+      }
+    }
+
+    function logout() {
+      fetch('/api/logout').then(() => {
+        alert('You have been logged out.');
+        window.location.href = '/';
+      });
+    }
+
+    window.onload = loadCart;
+  </script>
+</body>
+</html>

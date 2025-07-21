@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Checkout - Techmspire</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      padding: 60px;
+    }
+    .form-container, .confirmation-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .details {
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+    .highlight {
+      color: #007BFF;
+      font-weight: bold;
+    }
+    .continue-btn {
+      background: #007BFF;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container" id="order-form-section">
+    <h2>Confirm Your Order</h2>
+    <form id="order-form" onsubmit="submitOrder(event)">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <textarea name="address" placeholder="Shipping Address" required></textarea>
+      <select name="payment" required>
+        <option value="">Select Payment Method</option>
+        <option value="Cash on Delivery">Cash on Delivery</option>
+        <option value="UPI">UPI</option>
+        <option value="Card">Credit/Debit Card</option>
+      </select>
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+
+  <div class="confirmation-container" id="confirmation-section" style="display:none;">
+    <h2>✅ Order Successfully Placed!</h2>
+    <div class="details" id="order-summary">
+      <!-- Order details will appear here -->
+    </div>
+    <button class="continue-btn" onclick="window.location.href='/products'">Continue Shopping</button>
+    <button class="continue-btn" style="margin-top: 12px;" onclick="window.location.href='/order-history'">View Order History</button>
+
+  </div>
+
+  <script>
+    function getExpectedDate() {
+      const today = new Date();
+      today.setDate(today.getDate() + 7);
+      return today.toLocaleDateString("en-IN", { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    async function submitOrder(e) {
+      e.preventDefault();
+      const form = document.getElementById('order-form');
+      const data = {
+        name: form.name.value,
+        address: form.address.value,
+        payment: form.payment.value
+      };
+
+      const res = await fetch('/api/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        document.getElementById('order-form-section').style.display = 'none';
+        document.getElementById('confirmation-section').style.display = 'block';
+
+        const summary = `
+          <p><span class="highlight">Name:</span> ${data.name}</p>
+          <p><span class="highlight">Address:</span> ${data.address}</p>
+          <p><span class="highlight">Payment Method:</span> ${data.payment}</p>
+          <p><span class="highlight">Expected Delivery:</span> ${getExpectedDate()}</p>
+        `;
+
+        document.getElementById('order-summary').innerHTML = summary;
+      } else {
+        const msg = await res.text();
+        alert('❌ Failed to place order: ' + msg);
+      }
+    }
+  </script>
+</body>
+</html>
